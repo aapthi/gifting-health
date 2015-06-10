@@ -725,8 +725,8 @@ tr.summary-details-excluded { font-style:italic; }
 .ratings .rating-links .separator { margin:0 2px; }
 .ratings dt {}
 .ratings dd {}
-.rating-box { width:51px; height:9px; font-size:0; line-height:0; background:url(/skin/frontend/default/em0075/images/bkg_rating.png) 0 0 repeat-x; text-indent:-999em; overflow:hidden; }
-.rating-box .rating { float:left; height:9px; background:url(/skin/frontend/default/em0075/images/bkg_rating.png) 0 100% repeat-x; }
+.rating-box { width:51px; height:9px; font-size:0; line-height:0; background:url(http://localhost/gifting-health/trunk/skin/frontend/default/em0075/images/bkg_rating.png) 0 0 repeat-x; text-indent:-999em; overflow:hidden; }
+.rating-box .rating { float:left; height:9px; background:url(http://localhost/gifting-health/trunk/skin/frontend/default/em0075/images/bkg_rating.png) 0 100% repeat-x; }
 .ratings .rating-box { float:left; margin-right:5px; margin-top:1px}
 .ratings .amount {}
 .ratings-table th{ font-size:90%; line-height:1.15; padding:5px 0; font-weight:bold; }
