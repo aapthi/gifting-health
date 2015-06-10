@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<config>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<config>
+								<children>
+									<questions translate="title" module="questions">
+										<title>Questions</title>
+									</questions>
+								</children>
+							</config>
+						</children>
+					</system>
+					<questions translate="title" module="questions">
+						<title>Questions</title>
+						<children>
+							<question translate="title" module="questions">
+								<title>Questions</title>
+							</question>
+						</children>
+					</questions>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+	<menu>
+		<natv translate="title">
+			<title>Natv</title>
+			<sort_order>130</sort_order>
+		 	<children>
+				<question translate="title" module="questions">
+					<title>Questions</title>
+					<action>adminhtml/questions_question</action>
+					<sort_order>1</sort_order>
+				</question>
+			</children>
+		</natv>
+	</menu>
+</config>
