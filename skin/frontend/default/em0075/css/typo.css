@@ -1,0 +1,103 @@
+Typography
+		font:/*BEGIN:general_font*/12px/1.35 Arial, Helvetica, sans-serif/*END:general_font*/;
+		font:/*BEGIN:h1_font*/normal 22px/1.15 helvetica,arial,sans-serif/*END:h1_font*/; 
+		font:/*BEGIN:h2_font*/normal 20px/1.25 helvetica,arial,sans-serif/*END:h2_font*/;
+		font:/*BEGIN:h3_font*/normal 18px/1.25 helvetica,arial,sans-serif/*END:h3_font*/;
+		font:/*BEGIN:h4_font*/normal 16px/1.35 helvetica,arial,sans-serif/*END:h4_font*/;
+		font:/*BEGIN:h5_font*/normal 14px/1.35 helvetica,arial,sans-serif/*END:h5_font*/; 
+		font:/*BEGIN:h6_font*/normal 12px/1.35 helvetica,arial,sans-serif/*END:h6_font*/; 
+	General :
+		box-shadow:/*BEGIN:box_shadow*/ -3px 5px 11px #e6e6e6 /*END:box_shadow*/ ;
+		-moz-box-shadow:/*BEGIN:box_shadow*/ -3px 5px 11px #e6e6e6 /*END:box_shadow*/ ;
+		-webkit-box-shadow: /*BEGIN:box_shadow*/ -3px 5px 11px #e6e6e6 /*END:box_shadow*/ ;
+		border-radius:/*BEGIN:rounded_corner*/3px/*END:rounded_corner*/;
+		-webkit-border-radius:/*BEGIN:rounded_corner*/3px/*END:rounded_corner*/;
+		-moz-border-radius:/*BEGIN:rounded_corner*/3px/*END:rounded_corner*/;
+		
+	Top Header
+		- background-color : background-color:/*BEGIN:top_header_bgcolor*/#0a8df3/*END:top_header_bgcolor*/
+		- background-color : background-color:/*BEGIN:top_header2_bgcolor*/#0564c6/*END:top_header2_bgcolor*/
+		- text-color: color:/*BEGIN:top_header_text_color*/#fff/*END:top_header_text_color*/	
+*** bo background img, backgournd position, background repeat 
+		
+	Header
+			- background-color :/*BEGIN:header_bgcolor*/#003e6d/*END:header_bgcolor*/
+			- background-color :/*BEGIN:header_bgcolor2*/#0a8ff3/*END:header_bgcolor2*/   //search
+			- background-color :/*BEGIN:header_bgcolor3*/#0282e2/*END:header_bgcolor3*/  //cart
+			- background-color :/*BEGIN:header_bgcolor4*/#fff/*END:header_bgcolor4*/  //dropdown, input
+			- text color: color: /*BEGIN:header_text_color*/#fff/*END:header_text_color*/	
+			- text color 2: color: /*BEGIN:header_text2_color*/#797979/*END:header_text2_color*/	
+			- background-image: /*BEGIN:header_bgimage*/none/*END:header_bgimage*/	
+			- background-position:/*BEGIN:header_bgposition*/0 0/*END:header_bgposition*/
+			- background-repeat:/*BEGIN:header_bgrepeat*/repeat/*END:header_bgrepeat*/
+			- border:1px solid /*BEGIN:header_line*/#809fb6/*END:header_line*/
+			- border:1px solid /*BEGIN:header2_line*/#0277ce/*END:header2_line*/ 
+			- border:1px solid /*BEGIN:header3_line*/#2ea2f9/*END:header3_line*/
+	Menu
+		- Top Menu 
+			+ Background Color : background-color: /*BEGIN:menu_top_bgcolor*/#ff7200/*END:menu_top_bgcolor*/	
+			+ Background Color Hover: background-color: /*BEGIN:menu_top_hover_bgcolor*/#ff7200/*END:menu_top_hover_bgcolor*/
+			+ Text Color : color: /*BEGIN:menu_top_text_color*/#ffffff/*END:menu_top_text_color*/
+			+ Hover/Active Text Color: color: /*BEGIN:menu_active_text_color*/#ffffff/*END:menu_active_text_color*/
+			- border: 1px solid /*BEGIN:menu_line*/#e76200/*END:menu_line*/
+		
+		- Dropdown Menu
+			+ Background Color:  background-color: /*BEGIN:menu_drop_bgcolor*/#fff/*END:menu_drop_bgcolor*/
+			+ Background Color Hover:  background-color: /*BEGIN:menu_drop_hover_bgcolor*/#fff1e5/*END:menu_drop_hover_bgcolor*/
+			+ Text Color: color: /*BEGIN:menu_drop_text_color*/#686868/*END:menu_drop_text_color*/
+			+ Text Color 2: color:/*BEGIN:menu_drop_text2_color*/#131313/*END:menu_drop_text2_color*/
+			+ Text Color Link Hover: color:/*BEGIN:menu_drop_link_color*/#ff7200/*END:menu_drop_link_color*/ 
+			+ border:1px solid /*BEGIN:menu_drop_line*/#cccccc/*END:menu_drop_line*/
+		
+	Body
+		- Background Color 1: /*BEGIN:body_bgcolor1*/#fff/*END:body_bgcolor1*/ 
+		- Background Color 2: /*BEGIN:body_bgcolor2*/#f1f1f1/*END:body_bgcolor2*/ //xam  
+		- Background Color 3: /*BEGIN:body_bgcolor3*/#69a204/*END:body_bgcolor3*/   //xanh
+		- Background Color 4: /*BEGIN:body_bgcolor4*/#f40000/*END:body_bgcolor4*/  //do
+		- Background Color 5: /*BEGIN:body_bgcolor5*/#171313/*END:body_bgcolor5*/  //den
+5	----	- background-position:/*BEGIN:body_bgposition*/0 0/*END:body_bgposition*/
+6	----	- background-repeat:/*BEGIN:body_bgrepeat*/no-repeat/*END:body_bgrepeat*/
+		- Background Image: /*BEGIN:body_bgimage*/none/*END:body_bgimage*/
+
+		- Text Color 1: /*BEGIN:body_text_color1*/#5d5d5d/*END:body_text_color1*/ //xam dam  tab title,breadcrumbs, page title
+		- Text Color 2: /*BEGIN:body_text_color2*/#008bf4/*END:body_text_color2*/ //xanh   my account, product name hover...
+		- Text Color 3: /*BEGIN:body_text_color3*/#7f7f7f/*END:body_text_color3*/ //xam nhat   table , checkout title, ...
+		- Text Color 4: /*BEGIN:body_text_color4*/#ff0000/*END:body_text_color4*/ //do  required text
+		- Text Color 5: /*BEGIN:body_text_color5*/#ff7200/*END:body_text_color5*/ //cam   title block text
+		- Text Color 6: /*BEGIN:body_text_color6*/#fff/*END:body_text_color6*/    //toolbar, title checkout 
+		- Link Color:/*BEGIN:body_link_color*/#131313/*END:body_link_color*/  //den  tab title hover, table title
+		- Line 1 : /*BEGIN:body_line1*/#c4c4c4/*END:body_line1*/   //input, col left col right...
+		- Line 2 : /*BEGIN:body_line2*/#eaeaea/*END:body_line2*/  //category img, daily deal..
+		- Line 3 : /*BEGIN:body_line3*/#030303/*END:body_line3*/ //hover img color shop by
+
+	Footer
+		- Text Color 1:/*BEGIN:footer_text_color1*/#5d5d5d/*END:footer_text_color1*/ 
+		- Text Color 2:/*BEGIN:footer_text_color2*/#fff/*END:footer_text_color2*/ 
+		- Text Color 3:/*BEGIN:footer_text_color3*/#008beb/*END:footer_text_color3*/ 
+		- Line 1 : /*BEGIN:footer_line1*/#dadada/*END:footer_line1*/
+		- Background image : /*BEGIN:footer_bgimage*/none/*END:footer_bgimage*/
+		- Background Color:/*BEGIN:footer_bgcolor*/#171313/*END:footer_bgcolor*/
+		- Background Color:/*BEGIN:footer_bgcolor1*/#f4f4f4/*END:footer_bgcolor1*/
+7	---	- background-position:/*BEGIN:footer_bgposition*/0 0/*END:footer_bgposition*/
+8	---	- background-repeat:/*BEGIN:footer_bgrepeat*/no-repeat/*END:footer_bgrepeat*/
+	
+	Button
+		- Button 1
+			+ background color2: /*BEGIN:button1_bgcolor*/#000000/*END:button1_bgcolor*/
+			+ color: /*BEGIN:button1_color*/#ffffff/*END:button1_color*/		
+		- Button 2
+			+ background color: /*BEGIN:button2_bgcolor*/#fff/*END:button2_bgcolor*/
+			+ line: /*BEGIN:button2_line*/#9b9b9b/*END:button2_line*/
+			+ color: /*BEGIN:button2_color*/#787878/*END:button2_color*/
+		- Button 3
+			+ background color: /*BEGIN:button3_bgcolor*/#0592fc/*END:button3_bgcolor*/		
+			+ color: /*BEGIN:button3_color*/#ffffff/*END:button3_color*/
+
+			
+/* box/wide */
+background-color:/*BEGIN:page_bgcolor*/#fff/*END:page_bgcolor*/;
+background-image: /*BEGIN:page_bgimage*/none/*END:page_bgimage*/;
+background-position: /*BEGIN:page_bgposition*/0 0/*END:page_bgposition*/;
+background-repeat: /*BEGIN:page_bgrepeat*/repeat/*END:page_bgrepeat*/;			
+
+-moz-transition: all 300ms ease; -webkit-transition: all 300ms ease; -o-transition: all 300ms ease; transition: all 300ms ease;	
