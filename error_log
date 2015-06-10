@@ -1,0 +1,29 @@
+[05-Dec-2014 13:34:46 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 87 bytes) in /home/naturesvelvet/public_html/lib/Zend/Db/Statement/Pdo.php on line 290
+[05-Dec-2014 13:38:32 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 65552 bytes) in /home/naturesvelvet/public_html/lib/Zend/Locale/Data.php on line 948
+[05-Dec-2014 13:39:02 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 65552 bytes) in /home/naturesvelvet/public_html/lib/Zend/Locale/Data.php on line 323
+[05-Dec-2014 13:39:05 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 65552 bytes) in /home/naturesvelvet/public_html/lib/Zend/Locale/Data.php on line 323
+[05-Dec-2014 13:44:02 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 49152 bytes) in /home/naturesvelvet/public_html/app/code/core/Mage/Catalog/Model/Product/Attribute/Backend/Groupprice/Abstract.php on line 349
+[05-Dec-2014 13:44:16 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 65552 bytes) in /home/naturesvelvet/public_html/lib/Zend/Locale/Data.php on line 323
+[05-Dec-2014 19:05:47 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 12288 bytes) in /home/naturesvelvet/public_html/app/code/core/Mage/CatalogRule/Model/Observer.php on line 108
+[05-Dec-2014 19:05:50 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 65552 bytes) in /home/naturesvelvet/public_html/lib/Zend/Locale/Data.php on line 948
+[05-Dec-2014 19:06:00 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 65552 bytes) in /home/naturesvelvet/public_html/lib/Zend/Locale/Data.php on line 323
+[05-Dec-2014 19:07:38 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 65552 bytes) in /home/naturesvelvet/public_html/lib/Zend/Locale/Data.php on line 323
+[05-Dec-2014 19:07:57 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 65552 bytes) in /home/naturesvelvet/public_html/lib/Zend/Locale/Data.php on line 323
+[05-Dec-2014 19:08:11 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 65552 bytes) in /home/naturesvelvet/public_html/lib/Zend/Locale/Data.php on line 323
+[05-Dec-2014 19:08:45 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/naturesvelvet/public_html/app/code/community/EM/Em0075settings/Model/Config/Font.php on line 1
+[05-Dec-2014 19:09:49 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/naturesvelvet/public_html/app/code/community/EM/Em0075settings/Model/Config/Font.php on line 1
+[05-Dec-2014 19:10:25 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/naturesvelvet/public_html/app/code/community/EM/Em0075settings/Model/Config/Font.php on line 1
+[05-Dec-2014 19:14:43 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/naturesvelvet/public_html/app/code/community/EM/Em0075settings/Model/Config/Font.php on line 28
+[18-Dec-2014 08:02:52 UTC] PHP Fatal error:  Call to a member function getProductUrl() on a non-object in /home/naturesvelvet/public_html/app/design/frontend/default/em0075/template/catalog/socialSharingIcon.phtml on line 78
+[18-Dec-2014 08:03:02 UTC] PHP Fatal error:  Call to a member function getProductUrl() on a non-object in /home/naturesvelvet/public_html/app/design/frontend/default/em0075/template/catalog/socialSharingIcon.phtml on line 78
+[08-Jan-2015 10:19:49 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/naturesvelvet/public_html/app/code/core/Mage/Payment/Model/Observer.php on line 45
+[08-Jan-2015 10:19:56 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/naturesvelvet/public_html/app/code/core/Mage/Payment/Model/Observer.php on line 45
+[08-Jan-2015 10:20:21 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/naturesvelvet/public_html/app/code/core/Mage/Payment/Model/Observer.php on line 45
+[16-Jan-2015 01:22:32 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/naturesvelvet/public_html/lib/Varien/Simplexml/Element.php on line 195
+[19-Jan-2015 14:43:39 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/naturesvelvet/public_html/lib/Varien/Simplexml/Element.php on line 328
+[19-Jan-2015 22:38:15 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/naturesvelvet/public_html/lib/Varien/Simplexml/Element.php on line 447
+[04-Feb-2015 09:58:17 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/naturesvelvet/public_html/staging/app/design/frontend/default/em0075/template/page/html/head.phtml on line 45
+[11-Feb-2015 09:38:28 UTC] PHP Fatal error:  Call to a member function getBackend() on a non-object in /home/naturesvelvet/public_html/staging/app/code/core/Mage/Eav/Model/Entity/Abstract.php on line 816
+[17-Apr-2015 06:57:48 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/naturesvelvet/public_html/lib/Varien/Db/Adapter/Pdo/Mysql.php on line 1895
+[17-Apr-2015 06:59:22 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/naturesvelvet/public_html/app/code/core/Mage/Catalog/Helper/Product/Url.php on line 129
+[25-Apr-2015 13:13:51 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/naturesvelvet/public_html/lib/Zend/Db/Adapter/Abstract.php on line 1024
