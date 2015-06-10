@@ -1,0 +1,31 @@
+        <!--start of question and answer secttion -->
+
+        <?php 
+            $_product = Mage::getModel('catalog/product')->load($this->getId());
+            $questions = Mage::helper('questions/product')->getSelectedQuestions($_product);
+            $questionsCount = count($questions);
+        ?>
+        <?php if($questionsCount > 0): ?>
+        <div class="edgefxQuestionAnswerSection edgefxProjectDetailsSection">
+            <table class="edgefxProjectCategoryHeader headerContentPadding" cellpadding="0" cellspacing="0">
+            	<tr>
+            		<td class="categoryHeaderLbl">
+	                	<div class="edgefxProjectCategoryLabel font_15 textColor17 fontOpenBold displayInlineBlock">Q & A</div>
+	                </td>
+	                <td class="headerLineThirdColoumn">
+		                <div class="edgefxLineContainer">
+		                    <img width="2px" height="14px" src="<?php echo $this->getSkinUrl('');?>skinning-images/assets/separator_right.png" />
+		                    <img width="8px" height="14px" src="<?php echo $this->getSkinUrl('');?>skinning-images/assets/separator_left.png" class="rightFloat"/>
+		                </div>
+		            </td>
+                </tr>
+            </table>
+            <?php foreach ($questions as $question): ?>
+            <div class="questionAnswerHolder font_12 fontOpenReg textColor66">
+                <div class="questionHolder"><span class="fontOpenBold font_13">Q:</span>&nbsp;&nbsp;<?php echo $question->getQuestion(); ?></div>
+                <div class="answerHolder"><span class="fontOpenBold font_13">A:</span>&nbsp;&nbsp;<?php echo $question->getAnswer(); ?></div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
+        <!--end of question and answer section -->

@@ -1,0 +1,230 @@
+<style>
+.testmonials{
+	margin-bottom:20px;
+}
+	.testmonials img{
+		width:100px !important;
+		height:100px !important;
+	}
+	.float_left{
+		width:110px;
+		float:left;
+	}
+	.float_right{
+		float:left;
+		width:87%;
+	}
+	.brg_b{
+		border-bottom:1px solid #ccc;
+		padding:4px;
+	}
+	.brg_b a{
+		font-weight:bold;
+		font-size:14px;
+		color:#00a3ff !important;
+		text-decoration:none;
+	}
+	.brg_b a:hover{
+		color:#73b3e3
+	}
+	.name_rated{
+		padding:4px;
+	}
+	/*.name_rated span,.name_rated div{
+		display:inline-block;
+		
+	}*/
+	.desc{
+		padding:4px;
+	}
+	.user_name_col{
+		color:#111;
+		text-transform:capitalize;
+	}
+	.float_left_r{
+		float:left;
+		margin-right:5px;
+	}
+	.img_t{
+		margin-top:3px;
+	}
+	/*.rating-cust{
+	background: url("../skin/frontend/default/em0075/images/bkg_rating.png") repeat-x scroll 0 100% rgba(0, 0, 0, 0); !imporatnt;
+    	float: left; !imporatnt;
+    	height: 9px; !imporatnt;
+
+	}*/
+</style>
+<?php
+/**
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 DIVAMI Pvt.Ltd. (http://www.divami.com)
+ */
+/* @var $this Efk_Reports_Block_Product_AllReviews */
+?>
+<?php
+/**
+ * @see Efk_Reports_Block_Product_AllReviews
+ */
+ $_reviewBlock = Mage::getBlockSingleton('testimonials/Allreviews');
+?>
+
+<div id="static-page-indicator"></div>
+<?php 
+  	$cache = Mage::getSingleton('core/cache');
+	$getReviewsString = 'homepage-most-view';	
+	$getReviewsOnProductss=array();
+	$random_keys=array();
+	if($cache->load($getReviewsString)){
+		$getReviewsOnProductCache=$cache->load($getReviewsString);
+		$count = str_replace('"','',$cache->load("count"));
+		$getReviewsOnProductss=unserialize(urldecode($getReviewsOnProductCache));
+	}else{ 
+		$getReviewsOnProducts = $_reviewBlock->getAllReviews();	
+		$countReview=0;
+		$getDatareviews=array();
+		foreach($getReviewsOnProducts as $item) {
+			$productId = $item->getData('entity_pk_value');
+			$getDatareviews[$countReview]['productId']=$productId;
+			$_product = Mage::getModel("catalog/product")->load($productId);
+			if($productId){
+			
+				foreach( $item->getRatingVotes() as $vote ) {
+					$percentage = $vote->getPercent();
+					$getDatareviews[$countReview]['percentage']=$percentage;
+				}				
+				$name = $item ->getNickname();
+				$getDatareviews[$countReview]['name']=$name;
+				$date = $item->getCreatedAt();
+				$getDatareviews[$countReview]['date']=$date;
+				$details = $item->getDetail();
+				$getDatareviews[$countReview]['details']=$details;
+				$url = $_product->getProductUrl();
+				$getDatareviews[$countReview]['url']=$url;
+				$productName = $_product->getName();
+				$getDatareviews[$countReview]['productName']=$productName;
+			} 
+			if($date) {
+				$date = new DateTime($date);
+				$timezone = Mage::app()->getStore()->getConfig('general/locale/timezone');
+				$date->setTimezone(new DateTimeZone($timezone));	
+			}
+			$countReview++;
+		}
+		$getReviewsOnProductss=$getDatareviews;
+		$count=count($getReviewsOnProductss);
+		$unloadData=urlencode(serialize($getReviewsOnProductss));
+		$cache->save($unloadData, $getReviewsString, array("nicks_cache"), 2*60*60); 
+		$cache->save('"'.$count.'"', "count", array("nicks_cache"), 2*60*60);
+	}	
+	if($count>=5){
+		$pageReview=5;
+	}else if($count==4 || $count==3){
+		$pageReview=$count-1;
+	}/* else{
+		$pageReview=$count;
+	}*/
+	
+	$random_keys=array_rand($getReviewsOnProductss,$pageReview);
+	if (count($getReviewsOnProductss)!=0){?>	
+		<!-- start of the projects bought -->
+			<div class="widget-home">
+			<div class="widget-title">
+			<h3><span>Reviews</span></h3>
+			</div>
+			<div class="desc"><a class="view-more" href="https://naturesvelvet.in/index.php/testimonials" target="_blank">Show all</a></div>
+			</div>
+			<?php foreach($getReviewsOnProductss as $colrevkeys=>$itemm) {
+			if($random_keys>=3){
+			foreach($random_keys as $keyss=>$reviewskeyss){				
+				if($colrevkeys == $reviewskeyss) {					
+				$_product = Mage::getModel("catalog/product")->load($itemm['productId']);
+			?>			
+			<div class="edgefxProjectDescHolder overflowHide testmonials">
+					<div class="float_left">
+						<?php if($itemm['url']){ ?>
+						<a href="<?php echo $itemm['url']; ?>" title="<?php echo $this->escapeHtml($itemm['productName']); ?>" >
+		                    <img width="110px" height="120px" class="product-image" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(110, 120) ?>" width="110" height="120" alt="<?php echo $this->escapeHtml($itemm['productName']) ?>" />
+		                </a>
+		            	<?php } else { ?>
+            			<span title="<?php echo $this->escapeHtml($itemm['productName']) ?>" >
+						<a href="<?php echo $itemm['url']; ?>" title="<?php echo $this->escapeHtml($itemm['productName']); ?>" >
+		                     <img width="100px" height="100px" class="product-image" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(100, 100) ?>" width="110" height="120" alt="<?php echo $this->escapeHtml($itemm['productName']) ?>" />
+						</a>
+		                </span>
+		            	<?php } ?>
+					</div>
+					<div class="float_right">
+						<div class="brg_b">
+						<?php if($itemm['url']){ ?>
+							<a class="textColor20 fontOpenBold" href="<?php echo $itemm['url']; ?>" title="<?php echo $itemm['productName'];?>"><?php echo $itemm['productName']; ?></a>
+						<?php } else{ ?>
+							<a class="textColor20 fontOpenBold" href="<?php echo $itemm['url']; ?>" title="<?php echo $itemm['productName']; ?>"><?php echo $itemm['productName']; ?></a>
+						<?php } ?>
+						</div>					
+						<div class="name_rated">
+							<span class="textcolor"><span class="user_name_col float_left_r"><?php echo $itemm['name'];?>&nbsp;rated&nbsp;</span> 
+								<div class="rating float_left_r">
+									<div class="rating-box img_t">
+						            	<div class="rating-star" >											
+											<div class="rating" style="width:<? echo $itemm['percentage'];?>%;"></div>
+										</div>
+									</div>
+								</div>
+								<span  class="font_13 fontOpenItalic textColor33 float_left_r">&nbsp;on 
+								<?php if($itemm['date']){ $daten=$itemm['date']; echo $daten;} ?>
+								</span>
+							</span>
+						</div>
+						<div style="clear:both;"></div>
+						<div class="desc"><?php echo $itemm['details']; ?></div>
+					</div>
+					<div style="clear:both;"></div>
+				</div> 
+			<?php } } } else {  $_product = Mage::getModel("catalog/product")->load($itemm['productId']); ?>
+				<div class="edgefxProjectDescHolder overflowHide testmonials">
+					<div class="float_left">
+						<?php if($itemm['url']){ ?>
+						<a href="<?php echo $itemm['url']; ?>" title="<?php echo $this->escapeHtml($itemm['productName']); ?>" >
+		                    <img width="110px" height="120px" class="product-image" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(110, 120) ?>" width="110" height="120" alt="<?php echo $this->escapeHtml($itemm['productName']) ?>" />
+		                </a>
+		            	<?php } else { ?>
+            			<span title="<?php echo $this->escapeHtml($itemm['productName']) ?>" >
+						<a href="<?php echo $itemm['url']; ?>" title="<?php echo $this->escapeHtml($itemm['productName']); ?>" >
+		                     <img width="100px" height="100px" class="product-image" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(100, 100) ?>" width="110" height="120" alt="<?php echo $this->escapeHtml($itemm['productName']) ?>" />
+						</a>
+		                </span>
+		            	<?php } ?>
+					</div>
+					<div class="float_right">
+						<div class="brg_b">
+						<?php if($itemm['url']){ ?>
+							<a class="textColor20 fontOpenBold" href="<?php echo $itemm['url']; ?>" title="<?php echo $itemm['productName'];?>"><?php echo $itemm['productName']; ?></a>
+						<?php } else{ ?>
+							<a class="textColor20 fontOpenBold" href="<?php echo $itemm['url']; ?>" title="<?php echo $itemm['productName']; ?>"><?php echo $itemm['productName']; ?></a>
+						<?php } ?>
+						</div>					
+						<div class="name_rated">
+							<span class="textcolor"><span class="user_name_col float_left_r"><?php echo $itemm['name'];?>&nbsp;rated&nbsp;</span> 
+								<div class="rating float_left_r">
+									<div class="rating-box img_t">
+						            	<div class="rating-star" >											
+											<div class="rating" style="width:<? echo $itemm['percentage'];?>%;"></div>
+										</div>
+									</div>
+								</div>
+								<span  class="font_13 fontOpenItalic textColor33 float_left_r">&nbsp;on 
+								<?php if($itemm['date']){ $daten=$itemm['date']; echo $daten;} ?>
+								</span>
+							</span>
+						</div>
+						<div style="clear:both;"></div>
+						<div class="desc"><?php echo $itemm['details']; ?></div>
+					</div>
+					<div style="clear:both;"></div>
+				</div> 			
+			<? } }?> 	
+		<!-- end of projects bought -->
+	<?php } ?>

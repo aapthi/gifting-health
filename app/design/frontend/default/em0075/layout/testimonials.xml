@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<layout version="0.1.0">
+    <testimonials_index_index>
+        <reference name="content">
+            <block type="testimonials/allreviews" name="allreviews" as="allreviews" template="testimonials/all_reviews.phtml"></block>
+        </reference>
+    </testimonials_index_index>	
+</layout>

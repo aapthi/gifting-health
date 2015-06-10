@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="footer_links">
+            <action method="removeLinkByUrl"><url>http://naturesvelvet.in/index.php/contact-us/</url></action>
+        </reference>
+    </default>
+</layout> 

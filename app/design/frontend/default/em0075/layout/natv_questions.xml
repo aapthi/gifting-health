@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<layout>
+	<default>
+		<reference name="footer_links">
+			<action method="addLink" translate="label title" module="questions">
+				<label>Questions</label>
+				<url helper="questions/getQuestionsUrl" />
+				<title>Questions</title>
+				<prepare />
+				<urlParams/>
+				<position>120</position>
+			</action>
+		</reference>
+	</default>
+	<questions_question_index translate="label" module="questions">
+		<label>Questions list</label>
+		<reference name="root">
+			<action method="setTemplate"><template>page/natv-1column.phtml</template></action>
+		</reference>		
+		<reference name="content">
+			<block type="questions/question_list" name="question_list" template="natv_questions/question/list.phtml" />
+		</reference>
+	</questions_question_index>
+	<questions_question_view translate="label" module="questions">
+		<label>Question view page</label>
+		<reference name="root">
+			<action method="setTemplate"><template>page/natv-1column.phtml</template></action>
+		</reference>
+		<reference name="content">
+			<block type="questions/question_view" name="question_view" template="natv_questions/question/view.phtml" />
+			<block type="questions/question_catalog_product_list" name="question.info.products" as="question_products" template="natv_questions/question/catalog/product/list.phtml" />
+		</reference>
+	</questions_question_view>
+	<catalog_product_view>
+		<reference name="product.info">
+			<block type="questions/catalog_product_list_question" name="product.info.questions" as="product_questions" template="natv_questions/catalog/product/list/question.phtml">
+				<!-- <action method="addToParentGroup"><group>detailed_info</group></action>
+				<action method="setTitle" translate="value" module="questions"><value>Questions</value></action> -->
+			</block>
+		</reference>
+	</catalog_product_view>
+	<questions_question_specific>
+		<reference name="content">
+            <remove name="content.reports.product.viewed" />
+            <remove name="content.catalog.product.new" />
+            <remove name="content.customer.allreviews" />
+            <remove name="hotSellers" />
+            <remove name="header"/>
+            <remove name="topsection"/>
+            <remove name="footer"/>
+            <remove name="left"/>
+            <block type="questions/catalog_product_list_question" name="product.info.questions.ajax" as="product_questions" template="natv_questions/catalog/product/list/question.phtml"/>
+        </reference>		
+	</questions_question_specific>
+</layout>

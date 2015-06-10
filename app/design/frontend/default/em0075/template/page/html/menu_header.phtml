@@ -1,0 +1,115 @@
+
+<script type="text/javascript">
+    jQuery(function( $ ){
+        var container = $("#toggleTextMenu");
+        $("#displayTextMenu").click(
+        function( event ){
+            event.preventDefault();
+            if (container.is( ":visible" )){
+                container.slideUp(1000);
+                $("#displayTextMenu").removeClass('hidden-arrow');
+                $("#displayTextMenu").attr('title', 'show menu')
+                
+                
+            } else {
+                container.slideDown(1000);
+                $("#displayTextMenu").toggleClass('hidden-arrow');
+                $("#displayTextMenu").attr('title', 'hide menu');
+            }
+        }
+        );         
+    });              
+</script>
+
+<?php
+    $page = Mage::app()->getFrontController()->getRequest()->getRouteName();
+    $homePage = false;
+
+    if($page =='cms'){
+        $cmsSingletonIdentifier = Mage::getSingleton('cms/page')->getIdentifier();
+        $homeIdentifier = Mage::app()->getStore()->getConfig('web/default/cms_home_page');
+        if($cmsSingletonIdentifier === $homeIdentifier){
+            $homePage = true;
+        }
+    }
+
+?>
+<div id="hidden-menu" class="menu-hidden-desktop" style="display: none;">
+    <a class="option" id="displayTextMenu" href="#" title="show menu" style=""><span>Navigation</span></a>
+    <div id="toggleTextMenu" style="display: none;">
+        <div class="menu-resize-inner">
+            <div class="menu-resize-inner-content">
+                <?php echo $this->getChildHtml('topMenuResize'); ?>
+            </div>
+        </div>
+    </div>
+</div>
+<div  class="menu-wrapper">
+        <script type="text/javascript">
+            function headerMenu(){
+                var $ = jQuery;
+                var container = $("#menu-default");
+                var isMobile = /iPhone|iPod|iPad|Phone|Mobile|Android|hpwos/i.test(navigator.userAgent);
+            if((!isMobile)&&!($("body").hasClass("adapt-0")==true)){
+            	$("#menuleftText,#menuleftTextHomepage").unbind("click");
+            	 $(".menu-wrapper").unbind('hover');
+            	container.show();
+                if (!($("body").hasClass("cms-index-index"))){
+                	container.hide();
+                    $(".menu-wrapper").hover(
+                        function(){
+                            container.fadeIn(500);
+                            $("#menuleftText").toggleClass('hidden-arrow');
+                            $("#menuleftText").attr('title', 'hide-option');
+                        },
+                        function(){
+                            container.fadeOut(100);
+                            $("#menuleftText").removeClass('hidden-arrow');
+                            $("#menuleftText").attr('title', 'show-option');
+                        }
+                    );
+                }
+            }else{
+                $("#menu-default").css("display","none");
+				 $(".menu-wrapper").unbind('hover');
+				 $("#menuleftText,#menuleftTextHomepage").unbind("click");
+				$("#menuleftText,#menuleftTextHomepage").removeClass('hidden-arrow');
+				$("#menuleftText,#menuleftTextHomepage").attr('title', 'show-option');
+				$("#menuleftText,#menuleftTextHomepage").click(
+                function( event ){
+                    event.preventDefault();
+                    if (container.is( ":visible" )){
+                        container.hide();
+                        $("#menuleftText,#menuleftTextHomepage").removeClass('hidden-arrow');
+                        $("#menuleftText,#menuleftTextHomepage").attr('title', 'show-option');
+                        
+                    } else {
+                        container.show();
+                        $("#menuleftText,#menuleftTextHomepage").toggleClass('hidden-arrow');
+                        $("#menuleftText,#menuleftTextHomepage").attr('title', 'hide-option');
+                    }
+                }
+                );
+            }              
+            };  
+            jQuery(document).ready(function(){
+            	headerMenu();
+        	});
+            jQuery(window).bind('emadaptchange orientationchange', function() {
+            	headerMenu();
+            });       
+        </script>
+    <div class="all_categories" <?php if (!$homePage) echo ' id="menuleftText"'; else echo ' id="menuleftTextHomepage"';?> >
+    	<div class="menuleftText-title"><div class="menuleftText" ><span><?php echo $this->__('Product Categories') ?></span></div></div>
+    </div>
+    <div class="menuleft">
+        <?php
+            $url = Mage::helper("core/url")->getCurrentUrl();
+            $url_check = "themeframework_admin/area/preview";
+        ?>
+        <div id="menu-default" class="mega-menu" <?php if ($homePage || stripos($url, $url_check) == true): echo 'style="display: block;"'; else: echo 'style="display: none;"'; endif; ?> >
+            
+                <?php echo $this->getChildHtml('topMenu'); ?>
+        </div>
+    </div>
+</div>

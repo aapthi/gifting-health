@@ -1,0 +1,336 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+
+<style>
+.resourcePPTImageHolder {
+	background:url("http://www.edgefxkits.com/skin/frontend/default/efk1/skinning-images/resourceMaterials_ppt.png");
+	height: 42px;
+	width:42px;
+	background-repeat: no-repeat;
+	/*background-position: center center;*/
+}
+
+.resourcePDFImageHolder {
+	background:url("http://www.edgefxkits.com/skin/frontend/default/efk1/skinning-images/resourceMaterials_pdf.png");
+	height: 42px;
+	width:42px;
+	background-repeat: no-repeat;
+}
+
+.resourceImageTypeHolder{
+	background-image: url('http://www.edgefxkits.com/skin/frontend/default/efk1/skinning-images/resource_image.png');
+	width: 42px;
+	height: 42px;
+	background-repeat: no-repeat;
+}
+
+.resourceDocImageHolder{
+	background-image: url('http://www.edgefxkits.com/skin/frontend/default/efk1/skinning-images/resource_doc.png');
+	width: 42px;
+	height: 42px;
+	background-repeat: no-repeat;
+}
+
+.resourceAudioImageHolder{
+	background-image: url('http://www.edgefxkits.com/skin/frontend/default/efk1/skinning-images/resource_audio.png');
+	width: 42px;
+	height: 42px;
+	background-repeat: no-repeat;
+}
+
+.resourceVideoTypeHolder{
+	background-image: url('http://www.edgefxkits.com/skin/frontend/default/efk1/skinning-images/resource_video.png');
+	width: 42px;
+	height: 42px;
+	background-repeat: no-repeat;
+}
+
+.resourceOtherImageHolder{
+	background-image: url('http://www.edgefxkits.com/skin/frontend/default/efk1/skinning-images/resource_default.png');
+	width: 42px;
+	height: 42px;
+	background-repeat: no-repeat;
+}
+.div_inline div{ 
+	float:left;
+	width:48%;
+}
+/*.div_inline span{
+	margin-left:50px;
+}*/
+.div_inline a{ 
+	display: table-cell;
+    height: 40px;
+  padding-left: 50px;
+    vertical-align: middle;
+}
+</style>
+<?php $_helper = $this->helper('catalog/output');
+    $pageLayout = str_replace(array('page/','.phtml'),'',Mage::app()->getLayout()->getBlock('root')->getTemplate());
+	$_reviewBlock = Mage::getBlockSingleton('catalog/allReviews');	
+?>
+<?php 
+	$_product = $this->getProduct();
+	$_pId = $_product->getId();
+    //get attachments and filter them by disposition values.
+    $attachments = Mage::getModel('fileuploader/fileuploader')->getFilesByProductId($_pId);
+    $attachItems = $attachments['items'];
+    $resourceAttachments =  array();
+    $_fileAttachments = array();
+    for($i = 0; $i < count($attachItems); $i++){
+        $item = $attachItems[$i];
+        if($item['content_disp'] == '2'){
+            $resourceAttachments[] = $item;
+        }
+        else if($item['content_disp'] == '0'){
+            $_fileAttachments[] = $item;
+        }
+    }
+    $_uploadHelper = Mage::helper('fileuploader');
+?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="product-view" itemscope itemtype="http://schema.org/Product">
+    <div class="product-essential">
+    <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <?php echo $this->getBlockHtml('formkey') ?>
+        <div class="no-display">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+        </div>
+        <div class="product-view-detail">
+            <div class="product-shop-top">
+			<meta itemprop="priceCurrency" content="<?php echo $currency_code = Mage::app()->getStore()->getCurrentCurrencyCode(); ?>"/>
+                <?php list($_prev_prod, $_next_prod) = Mage::helper('em0075settings/product')->getPreviousNextProducts($this->getProduct()); ?>
+
+                <?php if($_prev_prod != NULL): ?>
+                <a href="<?php echo $_prev_prod->getProductUrl(); ?>" class="prev"><?php echo $this->__('Previous') ?></a>
+                <?php endif; ?>
+
+                <?php if($_next_prod != NULL): ?>
+                <a href="<?php echo $_next_prod->getProductUrl(); ?>" class="next"><?php echo $this->__('Next' ) ?></a>
+                <?php endif; ?>
+                
+                <div class="product-name">
+                <h1 itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                </div>
+                
+               <!-- <p class="sku"><?php // echo $this->__('SKU:') ?> <?php //echo  $_product->getSKU()?></p>-->
+			   <div class="em_left">
+                <?php if ($this->canEmailToFriend()): ?>
+                    <p class="email-friend"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p>
+                <?php endif; ?>
+
+                <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+            <div class="product-img-box">
+                <?php echo $this->getChildHtml('media') ?>
+            </div>
+
+            <div class="product-shop" style="margin-left:<?php echo Mage::helper('em0075settings')->getImageProduct_BaseImageWidth(280)+145 ?>px">
+	            <?php if($pageLayout=='1column'):?>
+					<div class="product-shop-left">
+				<?php endif;?>    
+                	<?php if ($_product->getShortDescription()):?>
+	                    <div class="short-description">
+	                        <h2><?php echo $this->__('Quick Overview') ?></h2>
+                    <div class="std" itemprop="description"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
+	                    </div>
+	                <?php endif;?>
+	                <?php // echo $this->getChildHtml('alert_urls') ?>
+	                <?php echo $this->getChildHtml('product_type_data') ?>
+	                <?php echo $this->getTierPriceHtml() ?>
+	                <?php echo $this->getChildHtml('extrahint') ?>
+	                <?php if (!$this->hasOptions()):?>
+	                    <div class="add-to-box">
+	                        <?php if($_product->isSaleable()): ?>
+	                            <?php echo $this->getChildHtml('addtocart') ?>
+	                        <?php endif;?>
+	                    </div>
+	                    <?php echo $this->getChildHtml('extra_buttons') ?>
+	                <?php elseif (!$_product->isSaleable()): ?>
+	                    <div class="add-to-box">
+	                        <?php echo $this->getChildHtml('addto') ?>
+	                    </div>
+	                <?php endif; ?>
+	
+	                <?php echo $this->getChildHtml('other');?>
+	                <?php echo $this->getChildHtml('short_des_after'); ?>
+	
+	                <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+	                    <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+	                <?php endif;?>
+	            <?php if($pageLayout=='1column'):?>
+					</div>
+				<?php endif;?>  
+				<?php if($pageLayout=='1column'):?>
+					<div class="product-shop-right">
+						<?php echo $this->getChildHtml('catalog.product.related.01');?>
+					</div>
+				<?php endif;?>  
+            </div>
+
+            <div class="clearer"></div>
+            <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+                <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+            <?php endif;?>
+        </div>
+    </form>
+    <?php if (Mage::helper('em0075settings')->getGeneral_DisableSocial()==0): ?>
+	  <!--  <div id="social-share" class="hide-lte0 hide-lte1 hide-lte2"></div>-->
+	    <script type="text/javascript">
+	    	jQuery(document).ready(function($){
+	        	jQuery('#social-share').dcSocialShare({
+	            	buttons: 'facebook,plusone,twitter,pinterest',
+	                twitterId: 'designchemical',
+	                email: 'moc//niamod/liame',
+	                align: 'right',
+	                floater: false
+				});
+			});
+		</script>
+	<?php endif;?>
+    <script type="text/javascript">
+    //<![CDATA[
+        var productAddToCartForm = new VarienForm('product_addtocart_form');
+        productAddToCartForm.submit = function(button, url) {
+            if (this.validator.validate()) {
+                var form = this.form;
+                var oldUrl = form.action;
+
+                if (url) {
+                   form.action = url;
+                }
+                var e = null;
+                try {
+                    this.form.submit();
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+        }.bind(productAddToCartForm);
+
+        productAddToCartForm.submitLight = function(button, url){
+            if(this.validator) {
+                var nv = Validation.methods;
+                delete Validation.methods['required-entry'];
+                delete Validation.methods['validate-one-required'];
+                delete Validation.methods['validate-one-required-by-name'];
+                // Remove custom datetime validators
+                for (var methodName in Validation.methods) {
+                    if (methodName.match(/^validate-datetime-.*/i)) {
+                        delete Validation.methods[methodName];
+                    }
+                }
+
+                if (this.validator.validate()) {
+                    if (url) {
+                        this.form.action = url;
+                    }
+                    this.form.submit();
+                }
+                Object.extend(Validation.methods, nv);
+            }
+        }.bind(productAddToCartForm);
+    //]]>
+    </script>
+    </div>
+
+    <div class="product-collateral">
+    	<div class="product-collateral-item">		
+			<div class="box-collateral box-tags">
+				<h2>Description</h2>   
+				<div class="std" itemprop="description">
+					<?php echo $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?>
+				</div>
+			</div>
+		<!-- ====== Dileep 17-12-2014 Add Questions ==== ---->
+			<?php echo $this->getChildHtml('product_questions'); ?>
+		<!-- ====== Dileep 17-12-2014 Add Resources ==== ---->
+			 <!-- start of project resource holder -->
+		   <?php if(count($resourceAttachments)): ?>
+			<div class="box-collateral box-tags">
+				<h2>Resources</h2>              
+				<div class="">
+					<div class="div_inline">
+					<?php foreach ($resourceAttachments as $attachItem): ?>
+							<?php $url = $_uploadHelper->attachLink($attachItem);?>
+								<?php $resClassName  = $_uploadHelper->getClassName($attachItem);?>
+								<?php $target = ''; if($url): ?>
+									<?
+										if($resClassName == 'resourceVideoTypeHolder'){
+											$target = 'target="_blank"';
+										}
+									?>
+								<div class="<?php echo $resClassName;?>">
+								<span><a href="<?php echo $url; ?>" <?php echo $target; ?> class="pptpdfDescriptionHolder textColor66 font_12 curPointer"><?php echo $attachItem['title']; ?></a>	</span> </div>		
+								<?php endif; ?>
+					<?php endforeach;  ?>
+					</div><div style="clear:both"></div>
+				</div>
+			</div>
+			<?php endif; ?>
+        <!-- end of project resourceHolder-->			
+	        <?php // echo $this->getChildHtml('product_additional_data') ?>			
+			<!-- ====== Dileep 17-12-2014 Comment ==== ---->
+	        <?php // echo $this->getChildHtml('product_additional_collateral') ?>
+	       <?php echo $this->getChildHtml('product_additional_data_review') ?>
+    	      <?php echo $this->getChildHtml('review_list') ?>	        
+        </div>
+    </div>
+    <?php echo $this->getChildHtml('upsell_products') ?>    
+    <?php if (Mage::helper('em0075settings')->getImageProduct_UseTabs()): ?>
+    <script type="text/javascript">
+	    jQuery(window).load(function() {
+	    	// EM.tools.decorateProductCollateralTabs();
+	    });
+		/* ********** Script add by dileep ********* */
+		function getQuestionsAndAnswers(get_url){			
+			document.getElementById('limitQuestionView').style.display = 'none';
+			document.getElementById('allQuestionsview').style.display = 'block';
+		}
+    </script>
+    <?php endif ?>
+</div>

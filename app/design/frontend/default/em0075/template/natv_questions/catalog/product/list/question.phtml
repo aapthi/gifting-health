@@ -1,0 +1,74 @@
+<?php 
+	try{
+        $_product = $this->getProduct();
+        $questions = $this->getQuestionCollection();
+        $questionsCount = count($questions);
+    }
+    catch(Mage_Core_Exception $e){
+        
+    }
+?>
+<?php if($questionsCount > 0){ ?>
+	<div id="limitQuestionView">
+    <?php if(!$this->isPdf){ ?>
+		<div class="box-collateral box-tags" style="position:relative;">
+			<h2>Q &amp; A</h2>   
+			<?php if(!$this->_isAjax && $questionsCount > 4): ?>
+			 <div style="position:absolute;right:0;top:4px;">
+				<a href="javascript:void(0);" onClick="getQuestionsAndAnswers('<?php echo $this->getSpecificQuestionsUrl($_product->getId()); ?>')" style="color:#008bf4;font-weight:bold">SHOW ALL</a>
+			</div>
+			<?php endif; ?>               
+		</div>
+        <?php $qCount = 0; ?>
+        <?php foreach ($questions as $question): ?>
+            <?php if(!$this->_isAjax && $qCount > 3){ break;} ?>
+            <div>
+                <div><b style="color: #131313;">Q:</b>&nbsp;&nbsp;<?php echo $question->getQuestion(); ?></div>
+                <div style="margin-bottom:10px;"><b style="color: #131313;">A:</b>&nbsp;&nbsp;<?php echo $question->getAnswer(); ?></div>
+            </div>
+            <?php $qCount++; ?>
+        <?php endforeach; ?>
+    <?php } else{ ?>
+        <!-- Print/pdf section -->
+       <div class="box-collateral box-tags">
+		 <h2>Q &amp; A</h2>   
+        <?php $qCount = 0; ?>
+        <?php foreach ($questions as $question): ?>
+            <div style="padding-bottom: 25px; font-size: 13px; line-height: 18px;font-family: OpenSansRegular;color: #666666;">
+                <div><b style="color: #131313;">Q:</b>&nbsp;&nbsp;<?php echo $question->getQuestion(); ?></div>
+                <div><b style="color: #131313;">A:</b>&nbsp;&nbsp;<?php echo $question->getAnswer(); ?></div>
+            </div>
+            <?php $qCount++; ?>
+		</div>
+        <?php endforeach; ?>
+    <?php } ?>
+	</div>
+	<div id="allQuestionsview" style="display:none;">
+		<?php if(!$this->isPdf){ ?>
+		<div class="box-collateral box-tags" style="position:relative;">
+		<h2>Q &amp; A</h2>             
+		</div>
+		<?php $qCount = 0; ?>
+		<?php foreach ($questions as $question): ?>	
+		<div>
+		<div><b style="color: #131313;">Q:</b>&nbsp;&nbsp;<?php echo $question->getQuestion(); ?></div>
+		<div style="margin-bottom:10px;"><b style="color: #131313;">A:</b>&nbsp;&nbsp;<?php echo $question->getAnswer(); ?></div>
+		</div>
+		<?php $qCount++; ?>
+		<?php endforeach; ?>
+		<?php } else{ ?>
+		<!-- Print/pdf section -->
+		<div class="box-collateral box-tags">
+		<h2>Q &amp; A</h2>   
+		<?php $qCount = 0; ?>
+		<?php foreach ($questions as $question): ?>
+		<div style="padding-bottom: 25px; font-size: 13px; line-height: 18px;font-family: OpenSansRegular;color: #666666;">
+		<div><b style="color: #131313;">Q:</b>&nbsp;&nbsp;<?php echo $question->getQuestion(); ?></div>
+		<div><b style="color: #131313;">A:</b>&nbsp;&nbsp;<?php echo $question->getAnswer(); ?></div>
+		</div>
+		<?php $qCount++; ?>
+		</div>
+		<?php endforeach; ?>
+		<?php } ?>
+	</div>
+<?php } ?>

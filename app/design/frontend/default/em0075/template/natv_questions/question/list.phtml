@@ -1,0 +1,21 @@
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php $_questions = $this->getQuestions(); ?>
+<div class="page-title question-title">
+	<h1><?php echo Mage::helper('questions')->__('Questions') ?></h1>
+</div>
+<?php if ($_questions->getSize() > 0) :?>
+<?php echo $this->getPagerHtml(); ?>
+<div class="question-list-container">
+	<?php foreach ($_questions as $_question) : ?>
+		<div class="question-list-item">
+			<a href="<?php echo $_question->getQuestionUrl();?>" title="<?php echo $this->htmlEscape($_question->getQuestion()) ?>">
+				<?php echo $_question->getQuestion(); ?>
+			</a>
+
+		</div>
+	<?php endforeach;?>
+</div>
+<?php echo $this->getPagerHtml(); ?>
+<?php else : ?>
+	<?php echo Mage::helper('questions')->__('There are no questions at this moment');?>
+<?php endif;?> 

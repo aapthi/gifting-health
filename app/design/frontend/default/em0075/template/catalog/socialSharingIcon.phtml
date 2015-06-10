@@ -1,0 +1,112 @@
+<style>
+	.leftFloat{
+		float:left;
+	}
+	.share-buttons {
+		display: block;
+		position: fixed;
+		right: 0px;
+		top: 200px;
+		transition: all 0.5s ease 0s;
+	}
+	.mainDiv {
+		height: 44px;
+		width: 37px;
+	}
+	.shareImg {
+		background: url("http://naturesvelvet.in/skin/frontend/default/em0075/skinning-images/natvspritesheet.png") no-repeat scroll -404px -533px rgba(0, 0, 0, 0);
+		height: 7px;
+		left: 17px;
+		position: relative;
+		width: 4px;
+	}
+	.a {
+		cursor: pointer;
+		text-decoration: none;
+	}
+	.facebook-icon{
+		background-position: -315px -516px;
+		width: 37px;
+		height: 37px;
+	}
+
+	.facebook-icon:hover{
+		background-position: -360px -516px;
+		width: 37px;
+		height: 37px;
+	}
+
+	.twitter-icon{
+		background-position: -314px -559px;
+		width: 37px;
+		height: 37px;
+	}
+
+	.twitter-icon:hover{
+		background-position: -360px -559px;
+		width: 37px;
+		height: 37px;
+	}
+	.plus-icon{
+		background-position: -314px -602px;
+		width: 37px;
+		height: 37px;
+	}
+
+	.plus-icon:hover{
+		background-position: -360px -602px;
+		width: 37px;
+		height: 37px;
+	}
+	.natvSpriteImage {
+		background-image: url("http://naturesvelvet.in/skin/frontend/default/em0075/skinning-images/natvspritesheet.png");
+	}
+</style>
+<div class="share-buttons" title="Share product link">
+    <script type="text/javascript">
+    //<![CDATA[
+    // Popup window code
+    function newPopup(url) {
+        popupWindow = window.open(
+            url,'popUpWindow','height=700,width=800,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+    }
+    //]]>
+    </script>
+     <?php 
+		if($this->getRequest()->getControllerName()=='product') {
+			 $_product = Mage::registry('current_product');
+			 $product_url = $_product->getProductUrl();
+			 $divideUrl = explode("?",$product_url); //Sometimes url contains session data as query parameters,removing that session information
+			 $mainUrl = $divideUrl[0];
+			 $shareUrl = urlencode($mainUrl);
+			 $shareVia = urlencode("naturesvelvet");
+			 $shareText = urlencode("");
+		} else {
+			$product_url = Mage::helper('core/url')->getCurrentUrl();			
+			$shareUrl = urlencode($product_url);			
+			$shareVia = urlencode("naturesvelvet");
+			$shareText = urlencode("");
+		} 
+        
+	?>
+	
+        <div class="mainDiv ">
+			<a class="share-button-link" href="JavaScript:newPopup('<?php echo "https://www.facebook.com/sharer/sharer.php?u=" .$shareUrl; ?>');">
+				<div class="share-btn-icon natvSpriteImage facebook-icon"></div>
+				<div class="shareImg"></div>
+			</a>
+		</div>
+			
+		<div class="mainDiv">
+		    <a class="share-button-link leftFloat" href="JavaScript:newPopup('<?php echo "https://twitter.com/intent/tweet?url=".$shareUrl."&via=". $shareVia."&text=". $shareText;?>');"&via=". $shareVia."&text=". $shareText;?>" data-count="none">
+		    	<div class="share-btn-icon natvSpriteImage twitter-icon"></div>
+		    	<div class="shareImg"></div>
+		    </a>
+		</div>
+			
+		<div class="mainDiv">
+		    <a class="share-button-link leftFloat" href="JavaScript:newPopup('<?php echo "https://plus.google.com/share?url=". urlencode($product_url); ?>');" data-count="none">
+		    	<div class="share-btn-icon natvSpriteImage plus-icon"></div>
+		    </a>
+		</div>
+</div>

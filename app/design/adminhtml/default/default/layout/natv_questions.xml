@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<layout>
+	<!-- Questions grid action -->
+	<adminhtml_questions_question_index>
+		<reference name="menu">
+			<action method="setActive">
+				<menupath>questions/question</menupath>
+			</action>
+		</reference>
+		<reference name="content">
+			<block type="questions/adminhtml_question" name="question" />
+		</reference>
+	</adminhtml_questions_question_index>
+	<adminhtml_questions_question_grid>
+		<block type="core/text_list" name="root" output="toHtml">
+			<block type="questions/adminhtml_question_grid" name="question_grid"/>
+		</block>
+	</adminhtml_questions_question_grid>
+	<!-- Question add/edit action -->
+	<adminhtml_questions_question_edit>
+		<update handle="editor"/>
+		<reference name="menu">
+			<action method="setActive">
+				<menupath>questions/question</menupath>
+			</action>
+		</reference>
+		<reference name="content">
+			<block type="questions/adminhtml_question_edit" name="question_edit"></block>
+		</reference>
+		<reference name="left">
+			<block type="questions/adminhtml_question_edit_tabs" name="question_tabs"></block>
+		</reference> 
+	</adminhtml_questions_question_edit>
+	<adminhtml_questions_question_catalog_product_questions>
+		<block type="core/text_list" name="root" output="toHtml">
+			<block type="questions/adminhtml_catalog_product_edit_tab_question" name="product.edit.tab.question"/>
+			<block type="adminhtml/widget_grid_serializer" name="question_grid_serializer">
+				<reference name="question_grid_serializer">
+					<action method="initSerializerBlock">
+						<grid_block_name>product.edit.tab.question</grid_block_name>
+						<data_callback>getSelectedQuestions</data_callback>
+						<hidden_input_name>questions</hidden_input_name>
+						<reload_param_name>product_questions</reload_param_name>
+					</action>
+					<action method="addColumnInputName">
+						<input_name>position</input_name>
+					</action>
+				</reference>
+			</block>
+		</block>
+	</adminhtml_questions_question_catalog_product_questions>
+	<adminhtml_questions_question_catalog_product_questionsgrid>
+		<block type="core/text_list" name="root" output="toHtml">
+			<block type="questions/adminhtml_catalog_product_edit_tab_question" name="product.edit.tab.question"/>
+		</block>
+	</adminhtml_questions_question_catalog_product_questionsgrid>
+	<adminhtml_questions_question_products>
+		<block type="core/text_list" name="root" output="toHtml">
+			<block type="questions/adminhtml_question_edit_tab_product" name="question.edit.tab.product"/>
+			<block type="adminhtml/widget_grid_serializer" name="product_grid_serializer">
+				<reference name="product_grid_serializer">
+					<action method="initSerializerBlock">
+						<grid_block_name>question.edit.tab.product</grid_block_name>
+							<data_callback>getSelectedProducts</data_callback>
+							<hidden_input_name>products</hidden_input_name>
+							<reload_param_name>question_products</reload_param_name>
+					</action>
+					<action method="addColumnInputName">
+						<input_name>position</input_name>
+					</action>
+				</reference>
+			</block>
+		</block>
+	</adminhtml_questions_question_products>
+	<adminhtml_questions_question_productsgrid>
+		<block type="core/text_list" name="root" output="toHtml">
+			<block type="questions/adminhtml_question_edit_tab_product" name="question.edit.tab.product"/>
+		</block>
+	</adminhtml_questions_question_productsgrid>
+</layout>
