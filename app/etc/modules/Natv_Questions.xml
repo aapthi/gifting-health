@@ -1,0 +1,11 @@
+<config>
+	<modules>
+		<Natv_Questions>
+			<active>true</active>
+			<codePool>local</codePool>
+			<depends>
+				<Mage_Core />
+			</depends>
+		</Natv_Questions>
+	</modules>
+</config>
