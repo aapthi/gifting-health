@@ -1,0 +1,27 @@
+<?php
+
+	$_brandBlock = Mage::getBlockSingleton('brands/Allbrands');
+	$brands = $_brandBlock->getAllBrandsProduct();
+	$finalBrands = array();
+	$finalAblh = array('A'=>array(),'B'=>array(),'C'=>array(),'D'=>array(),'E'=>array(),'F'=>array(),'G'=>array(),
+			'G'=>array(),'H'=>array(),'I'=>array(),'J'=>array(),'K'=>array(),'L'=>array(),'M'=>array(),'N'=>array(),
+			'O'=>array(),'P'=>array(),'Q'=>array(),'R'=>array(),'S'=>array(),'T'=>array(),'U'=>array(),'V'=>array(),
+			'W'=>array(),'X'=>array(),'Y'=>array(),'Z'=>array());
+	foreach($brands as $key=>$val){
+		$label = $val['label'];
+		$rest = $label[0];
+		$brandUpper = strtoupper($rest);		
+		 if (array_key_exists($brandUpper, $finalAblh)) {
+			 foreach ($finalAblh as $k=>$v) {
+				// if (!is_array($v)) {
+					// continue;
+				// }
+				// if (array_key_exists($key, $v)) {
+					// return true;
+				// }
+				$finalBrands[$k] = array_push($v,$label);				
+			}
+		 }
+	}
+	echo '<pre>';print_r($finalBrands);exit;
+?>
