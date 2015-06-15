@@ -10,18 +10,95 @@
 	foreach($brands as $key=>$val){
 		$label = $val['label'];
 		$rest = $label[0];
-		$brandUpper = strtoupper($rest);		
-		 if (array_key_exists($brandUpper, $finalAblh)) {
-			 foreach ($finalAblh as $k=>$v) {
-				// if (!is_array($v)) {
-					// continue;
-				// }
-				// if (array_key_exists($key, $v)) {
-					// return true;
-				// }
-				$finalBrands[$k] = array_push($v,$label);				
-			}
-		 }
-	}
-	echo '<pre>';print_r($finalBrands);exit;
+		$brandUpper = strtoupper($rest);
+		if(array_key_exists($brandUpper, $finalAblh)){
+			array_push($finalAblh[$brandUpper],$label);				
+		}
+	}	
 ?>
+<div class="text-center">
+            <div class="ttl-cntnr">                
+                <h1>Brands in
+                  <span class="fnt-ttl fnt-bold">                         
+                        Ayurveda &amp; Herbs
+                  </span>
+                </h1>                
+            </div>
+            <div class="mrgn-t-50 nav-alpha-box">
+                
+                     <span class="mrgn-lr-5"><a data-target="#A" href="#A">A</a></span>
+                     <span class="separator">|</span>
+                
+                     <span class="mrgn-lr-5"><a data-target="#B" href="javascript:void(0)">B</a></span>
+                     <span class="separator">|</span>
+                
+                     <span class="mrgn-lr-5"><a data-target="#C" href="javascript:void(0)">C</a></span>
+                     <span class="separator">|</span>
+                
+                     <span class="mrgn-lr-5"><a data-target="#D" href="javascript:void(0)">D</a></span>
+                     <span class="separator">|</span>
+                
+                     <span class="mrgn-lr-5"><a data-target="#E" href="javascript:void(0)">E</a></span>
+                     <span class="separator">|</span>
+                
+                     <span class="mrgn-lr-5"><a data-target="#F" href="javascript:void(0)">F</a></span>
+                     <span class="separator">|</span>
+                
+                     <span class="mrgn-lr-5"><a data-target="#G" href="#G">G</a></span>
+                     <span class="separator">|</span>
+                
+                     <span class="mrgn-lr-5"><a data-target="#H" href="javascript:void(0)">H</a></span>
+                     <span class="separator">|</span>
+                
+                     <span class="mrgn-lr-5"><a data-target="#I" href="javascript:void(0)">I</a></span>
+                     <span class="separator">|</span>
+                
+                     <span class="mrgn-lr-5"><a data-target="#K" href="javascript:void(0)">K</a></span>
+                     <span class="separator">|</span>
+                
+                     <span class="mrgn-lr-5"><a data-target="#L" href="javascript:void(0)">L</a></span>
+                     <span class="separator">|</span>
+                
+                     <span class="mrgn-lr-5"><a data-target="#M" href="javascript:void(0)">M</a></span>
+                     <span class="separator">|</span>
+                
+                     <span class="mrgn-lr-5"><a data-target="#N" href="javascript:void(0)">N</a></span>
+                     <span class="separator">|</span>
+                
+                     <span class="mrgn-lr-5"><a data-target="#O" href="javascript:void(0)">O</a></span>
+                     <span class="separator">|</span>
+                
+                     <span class="mrgn-lr-5"><a data-target="#P" href="javascript:void(0)">P</a></span>
+                     <span class="separator">|</span>
+                
+                     <span class="mrgn-lr-5"><a data-target="#S" href="javascript:void(0)">S</a></span>
+                     <span class="separator">|</span>
+                
+                     <span class="mrgn-lr-5"><a data-target="#T" href="javascript:void(0)">T</a></span>
+                     <span class="separator">|</span>
+                
+                     <span class="mrgn-lr-5"><a data-target="#U" href="javascript:void(0)">U</a></span>
+                     <span class="separator">|</span>
+                
+                     <span class="mrgn-lr-5"><a data-target="#V" href="javascript:void(0)">V</a></span>
+                     <span class="separator">|</span>
+                
+                     <span class="mrgn-lr-5"><a data-target="#W" href="javascript:void(0)">W</a></span>
+                     <span class="separator">|</span>
+                
+                     <span class="mrgn-lr-5"><a data-target="#Z" href="javascript:void(0)">Z</a></span>
+                     <span class="separator"></span>
+                
+            </div>
+        </div>
+		<div class="brand-list-container">
+		 <?php $valA=''; foreach($finalAblh as $aphl=>$val){ $valA = $aphl;?>
+			<div class="mrgn-b-10 row">
+				<h2 id="<?php echo $valA;?>" class="span2 alpha-box brand-list-initial"><?php echo $valA;?></h2>
+			</div>
+			<? foreach($finalAblh[$aphl] as $keysss=>$valsss) {?>
+			<div class="mrgn-b-40 row">				  
+				  <a class="span3 ellipses" href="<? echo Mage::getBaseUrl();?>catalog/category/view/s/?manufacturer=32"><? echo $valsss;?></a>				
+			</div>
+		<? } } ?>
+		</div>
