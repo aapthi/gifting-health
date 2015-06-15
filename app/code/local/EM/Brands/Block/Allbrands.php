@@ -11,6 +11,7 @@ class EM_Brands_Block_Allbrands extends Mage_Core_Block_Template
 		# adding products count to the brands collection
 		foreach ($manufacturers as $key => $value) {
 			$collection = Mage::getModel('catalog/product')->getCollection();
+			
 			$collection->addFieldToFilter(array(array('attribute' => 'manufacturer', 'eq' => $value['value'])));
 			$numberOfProducts = count($collection);
 			$manufacturers[$key]['products_count'] = $numberOfProducts;
