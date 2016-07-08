@@ -24,15 +24,41 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+<style>
+	.sus_payment_brg{
+		border:1px solid #008000;
+		padding:20px 10px;
+		border-radius:6px 6px 4px 4px;
+		border-top:6px solid #008000;
+	}
+	.share_ico img{border-radius:4px;}
+</style>
+<?php
+	$orderInformation = "";
+	$lastName = '';
+	$firstName = '';
+	$order = Mage::getSingleton('sales/order'); 
+	$order->loadByIncrementId($this->escapeHtml($this->getOrderId()));
+	$_items = $order->getAllItems();		
+	if($order->getCustomerId() === NULL){
+		$lastName = $order->getBillingAddress()->getLastname();
+		$firstName = $order->getBillingAddress()->getFirstname();
+	} else {
+		$customer = Mage::getModel('customer/customer')->load($order->getCustomerId());
+		$lastName = $customer->getDefaultBillingAddress()->getLastname();
+		$firstName = $customer->getDefaultBillingAddress()->getFirstname();
+	}	
+?>
 <div class="page-title">
     <h1><?php echo $this->__('Your order has been received.') ?></h1>
 </div>
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
-<h2 class="sub-title"><?php echo $this->__('Thank you for your purchase!') ?></h2>
+<div class="sus_payment_brg">
+<h1 class="sub-title" style="color:#000"><i><?php echo $this->__('Thanks,') ?> <?php echo ucfirst($firstName) ?></i></h1>
 
 <?php if ($this->getOrderId()):?>
 <?php if ($this->getCanViewOrder()) :?>
-    <p><?php echo $this->__('Your order # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($this->getOrderId()))) ?></p>
+   <!-- <p><?php //echo $this->__('Your order # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($this->getOrderId()))) ?></p>-->
 <?php  else :?>
     <p><?php echo $this->__('Your order # is: %s.', $this->escapeHtml($this->getOrderId())) ?></p>
 <?php endif;?>
@@ -61,4 +87,42 @@
 
 <div class="buttons-set">
     <button type="button" class="button" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+	<a href="<? echo $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($this->getOrderId());?>"><button type="button" class="button" title="<?php echo $this->__('View a summary of your order') ?>"><span><span><?php echo $this->__('View a summary of your order') ?></span></span></button></a>
 </div>
+<div>
+	<?php foreach($_items as $_item){
+		$orderInformation = $_item->getProduct();
+		$productImage = Mage::helper('catalog/image')->init($orderInformation, 'small_image')->resize(75,80);
+		 $product_url = $orderInformation->getProductUrl();
+		 $divideUrl = explode("?",$product_url); //Sometimes url contains session data as query parameters,removing that session information
+		 $mainUrl = $divideUrl[0];
+		 $shareUrl = urlencode($mainUrl);
+		 $shareVia = urlencode("naturesvelvet");	
+		 $shareText = urlencode("");
+		?>	
+	<div style="float:left; width:100px;">
+			<img class="product-image" src="<? echo $productImage;?>" style="border:1px solid #ddd;padding:4px;margin-top:10px">
+	</div>
+	<div style="float:left; width:1000px;">
+		<p><h5><? echo ucfirst($orderInformation->name);?></h5></p>
+		<p><? echo ucfirst($orderInformation->description);?></p>
+		<div class="share_ico"><a class="share-button-link" href="JavaScript:newPopup('<?php echo "https://www.facebook.com/sharer/sharer.php?u=" .$shareUrl; ?>');" title="Share this item Facebook"><img src="<? echo $this->getSkinUrl('images/Social-Network-Facebook-icon.png');?>"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a class="share-button-link" href="JavaScript:newPopup('<?php echo "https://twitter.com/intent/tweet?url=".$shareUrl."&via=". $shareVia."&text=". $shareText;?>');"&via=". $shareVia."&text=". $shareText;?>" data-count="none" title="Share this item Twitter"><img src="<? echo $this->getSkinUrl('images/Twitter-icon.png');?>"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a class="share-button-link" href="JavaScript:newPopup('<?php echo "https://plus.google.com/share?url=". urlencode($product_url); ?>');" data-count="none" title="Share this item Email"><img src="<? echo $this->getSkinUrl('images/Other-Mail-Metro-icon.png');?>"></a></div>
+	</div>
+	<div style="clear:both"></div>
+	<div>	
+		
+	</div>
+	<?php } ?>
+</div>
+</div>
+ <script type="text/javascript">
+    //<![CDATA[
+    // Popup window code
+    function newPopup(url) {
+        popupWindow = window.open(
+            url,'popUpWindow','height=700,width=800,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+    }
+    //]]>
+</script>

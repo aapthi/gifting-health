@@ -46,5 +46,9 @@ class EM_Testimonials_IndexController extends Mage_Core_Controller_Front_Action
 		$count=count($getReviewsOnProductss);
 		echo '<pre>';print_r($getReviewsOnProductss);exit;	
 	}
+	public function productbrandsAction(){		
+		$this->loadLayout(); 
+		$this->renderLayout();	
+	}
 }
 ?>

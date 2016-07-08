@@ -45,14 +45,23 @@ class Mage_Sales_Model_Quote_Address_Total_Grand extends Mage_Sales_Model_Quote_
         $baseGrandTotal = $address->getBaseGrandTotal();
 
         $store      = $address->getQuote()->getStore();
-        $totals     = array_sum($address->getAllTotalAmounts());
-        $totals     = $store->roundPrice($totals);
-        $baseTotals = array_sum($address->getAllBaseTotalAmounts());
-        $baseTotals = $store->roundPrice($baseTotals);
-
-        $address->setGrandTotal($grandTotal+$totals);
-        $address->setBaseGrandTotal($baseGrandTotal+$baseTotals);
-        return $this;
+       // $totals     = array_sum($address->getAllTotalAmounts());
+       // $totals     = $store->roundPrice($totals);
+       // $baseTotals = array_sum($address->getAllBaseTotalAmounts());
+       // $baseTotals = $store->roundPrice($baseTotals);
+		$quote = $address->getQuote();
+        $cartItems = $quote->getAllVisibleItems();
+		$totcomission = 0; $totals =0;
+        foreach ($cartItems as $item)
+        {
+			 $qty = $item->getQty();
+			 $comission = Mage::getModel('catalog/product')->load($item->getProduct()->getId())->getComission();
+			 $e_c = $comission * $qty;
+			 $totcomission += $e_c; 					
+        }   
+		 $address->setGrandTotal($totcomission);
+		 $address->setBaseGrandTotal($totcomission);	
+		return $this;
     }
 
     /**
@@ -63,12 +72,14 @@ class Mage_Sales_Model_Quote_Address_Total_Grand extends Mage_Sales_Model_Quote_
      */
     public function fetch(Mage_Sales_Model_Quote_Address $address)
     {
-        $address->addTotal(array(
-            'code'  => $this->getCode(),
-            'title' => Mage::helper('sales')->__('Grand Total'),
-            'value' => $address->getGrandTotal(),
-            'area'  => 'footer',
-        ));
+		if($address->getGrandTotal()!=0){
+			$address->addTotal(array(
+				'code'  => $this->getCode(),
+				'title' => Mage::helper('sales')->__('Grand Total'),
+				'value' => $address->getGrandTotal()/2,
+				'area'  => 'footer',
+			));
+		}
         return $this;
     }
 }

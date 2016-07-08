@@ -45,11 +45,14 @@
         <tbody>
              <?php// echo $this->renderTotals(); ?>
 			 <?php 
-			 $totalOriginalPrice=''; $totalDiscountPrice=''; $totalSaveingPrice=''; $cart = Mage::getModel('checkout/cart')->getQuote();
+			 $totalOriginalPrice=''; $totalDiscountPrice=''; $totalSaveingPrice=''; $cart = Mage::getModel('checkout/cart')->getQuote(); $totcomission = '';
 				foreach ($cart->getAllItems() as $item) { 
+					 $comission = Mage::getModel('catalog/product')->load($item->getProduct()->getId())->getComission();
 					 $qty = $item->getQty();
 					 $top = $item->getProduct()->getPrice() * $qty;
 					 $totalOriginalPrice += $top;
+					 $e_c = $comission * $qty;
+					 $totcomission += $e_c; 
 				}
 				$totals = $this->helper('checkout/cart')->getQuote()->getTotals();
 				$discount = null;
@@ -59,7 +62,7 @@
 					$discount = 0;
 				}
 				?>
-				<tr>
+				<!--<tr>
 					<td colspan="1" class="a-right" style="">
 					Original Cost   </td>
 					<td class="a-right" style="">
@@ -86,6 +89,13 @@
 					Your savings are    </td>
 					<td class="a-right" style="">
 						<span class="price"><?php echo preg_replace("/&#?[a-z0-9]+;/i","", $this->helper('core')->formatPrice(($totalOriginalPrice - $totals['subtotal']->getValue() - $discount), false)); ?> </span>    
+					</td>
+				</tr>-->
+				<tr>
+					<td colspan="1" class="a-right" style="">
+					Comission    </td>
+					<td class="a-right" style="">
+						<span class="price"><?php echo preg_replace("/&#?[a-z0-9]+;/i","", $this->helper('core')->formatPrice(($totcomission), false)); ?> </span>    
 					</td>
 				</tr>
         </tbody>
